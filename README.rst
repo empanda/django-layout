@@ -6,7 +6,12 @@ Django Layout
 
 ``django-layout`` provides sane defaults for new Django projects based on `established best practices <http://lincolnloop.com/django-best-practices/>`__. To use ``django-layout`` run the following command::
 
-     django-admin.py startproject --template=https://github.com/lincolnloop/django-layout/zipball/master --extension=py,rst,gitignore,example project_name
+     django-admin.py startproject --template=https://github.com/empanda/django-layout/zipball/master --extension=py,rst,gitignore,example project_name
+
+
+This project also contains a lot of opinions on how a Django project
+should be setup and what apps to use. You can learn more about the choices
+that are made and why in the docs.
 
 .. note:: The text following this comment block will become the README.rst of the new project.
 
