@@ -23,5 +23,6 @@ DATABASES = {
     }
 }
 
-# ROOT_URLCONF = '{{ project_name }}.urls.local'
-# WSGI_APPLICATION = '{{ project_name }}.wsgi.local.application'
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += ('debug_toolbar')
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware')
