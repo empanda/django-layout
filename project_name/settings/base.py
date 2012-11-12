@@ -2,42 +2,6 @@
 # Import global settings to make it easier to extend settings.
 from django.conf.global_settings import *   # pylint: disable=W0614,W0401
 
-#==============================================================================
-# Generic Django project settings
-#==============================================================================
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-SITE_ID = 1
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-TIME_ZONE = 'UTC'
-USE_TZ = True
-USE_I18N = True
-USE_L10N = True
-LANGUAGE_CODE = 'en'
-LANGUAGES = (
-    ('en', 'English'),
-)
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '{{ secret_key }}'
-
-INSTALLED_APPS = (
-    # '{{ project_name }}.apps.',
-
-    #'south',
-
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
-)
 
 #==============================================================================
 # Calculation of directories relative to the project module location
@@ -68,6 +32,59 @@ else:
 if not os.path.exists(VAR_ROOT):
     os.mkdir(VAR_ROOT)
 
+
+#==============================================================================
+# Generic Django project settings
+#==============================================================================
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+SITE_ID = 1
+
+#==============================================================================
+# Localization settings
+#==============================================================================
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+TIME_ZONE = 'UTC'
+USE_TZ = True
+
+USE_I18N = True
+USE_L10N = True
+
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ('en', 'English'),
+)
+
+#==============================================================================
+# Installed apps
+#==============================================================================
+
+INSTALLED_APPS = (
+    # Local Apps
+    # '{{ project_name }}.apps.',
+
+    # Third Party Apps
+    'south',
+    'compressor',
+    'waffle',
+    'django_nose',
+
+    # Django Apps
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+)
+
+
 #==============================================================================
 # Project URLS and media settings
 #==============================================================================
@@ -86,6 +103,12 @@ MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, 'static'),
+)
+
+STATICFILES_FINDERS += (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 #==============================================================================
@@ -110,13 +133,32 @@ MIDDLEWARE_CLASSES += (
 # Auth / security
 #==============================================================================
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '{{ secret_key }}'
+
+INTERNAL_IPS = ('127.0.0.1',)
+
 AUTHENTICATION_BACKENDS += (
 )
 
 #==============================================================================
-# Miscellaneous project settings
+# Django Compressor settings
 #==============================================================================
 
+COMPRESS_CSS_HASHING_METHOD = 'content'
+
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.datauri.CssDataUriFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+)
+
+COMPRESS_DATA_URI_MAX_SIZE = 30 * 1024  # 30KB
+
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+COMPRESS_OFFLINE = True
+
 #==============================================================================
-# Third party app settings
+# Miscellaneous project settings
 #==============================================================================
