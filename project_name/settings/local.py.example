@@ -8,21 +8,135 @@ your code repository.
 """
 from {{ project_name }}.settings.base import *   # pylint: disable=W0614,W0401
 
+#==============================================================================
+# Debug settings
+#==============================================================================
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+DEBUG_TOOLBAR = DEBUG
+
+#==============================================================================
+# Admin/managers
+#==============================================================================
 
 ADMINS = (
     ('You', 'your@email'),
 )
+
 MANAGERS = ADMINS
+
+#==============================================================================
+# Database settings
+#==============================================================================
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(VAR_ROOT, 'dev.db'),
+        'USER': '',
+        'PASSWORD': '',
+        'PORT': '',
     }
 }
+
+#==============================================================================
+# Cache settings
+#==============================================================================
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'KEY_PREFIX': '{{ project_name }}'
+    }
+}
+
+#==============================================================================
+# Email settings
+#==============================================================================
+
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+EMAIL_HOST = 'localhost'
+
+EMAIL_HOST_USER = ''
+
+EMAIL_HOST_PASSWORD = ''
+
+EMAIL_PORT = ''
+
+EMAIL_USE_TLS = False
+
+EMAIL_SUBJECT_PREFIX = '[Django - {{ project_name }}]'
+
+#==============================================================================
+# Logging settings
+#==============================================================================
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'null': {
+            'class': 'django.utils.log.NullHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'root': {
+        'handlers': ['mail_admins', 'console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        # Define more specific logger here
+    },
+}
+
+#==============================================================================
+# Security settings
+#==============================================================================
+
+SSL = False
+
+#==============================================================================
+# HTTP proxy settings
+#==============================================================================
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+# See https://docs.djangoproject.com/en/1.4/ref/settings/#secure-proxy-ssl-header
+
+# USE_X_FORWARDED_HOST = True
+
+#==============================================================================
+# Conditional settings
+#==============================================================================
 
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar')
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+if SSL:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    # SECURE_HSTS_SECONDS = 
