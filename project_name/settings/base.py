@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'compressor',
     'waffle',
     'django_nose',
+    'djangosecure',
 
     # Django Apps
     'django.contrib.auth',
@@ -128,20 +129,26 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 #==============================================================================
 
 MIDDLEWARE_CLASSES += (
+    'djangosecure.middleware.SecurityMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'waffle.middleware.WaffleMiddleware',
 )
 
 #==============================================================================
-# Auth / security
+# Security settings
 #==============================================================================
 
-# Make this unique, and don't share it with anybody.
 SECRET_KEY = '{{ secret_key }}'
+
+X_FRAME_OPTIONS = 'DENY'
 
 INTERNAL_IPS = ('127.0.0.1',)
 
-AUTHENTICATION_BACKENDS += (
-)
+SESSION_COOKIE_HTTPONLY = True
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECURE_BROWSER_XSS_FILTER = True
 
 #==============================================================================
 # Test settings
