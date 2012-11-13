@@ -160,6 +160,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Django Compressor settings
 #==============================================================================
 
+COMPRESS_PARSER = 'compressor.parser.LxmlParser'
+
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
 COMPRESS_CSS_FILTERS = (
