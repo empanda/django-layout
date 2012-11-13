@@ -20,6 +20,7 @@ pytz
 py-bcrypt==0.2
 
 # Django util apps
+django-secure==0.1.2
 django-debug-toolbar==0.9.4
 django-nose==1.1
 factory-boy==1.2.0
