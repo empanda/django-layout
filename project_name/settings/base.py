@@ -120,6 +120,7 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request'
 )
 
 #==============================================================================
@@ -127,6 +128,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 #==============================================================================
 
 MIDDLEWARE_CLASSES += (
+    'waffle.middleware.WaffleMiddleware',
 )
 
 #==============================================================================
