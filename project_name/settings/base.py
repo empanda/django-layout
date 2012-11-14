@@ -148,7 +148,9 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 COMPRESS_PARSER = 'compressor.parser.LxmlParser'
 
-COMPRESS_CSS_HASHING_METHOD = 'content'
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+COMPRESS_OFFLINE = True
 
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
@@ -156,11 +158,16 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
 )
 
+COMPRESS_CSS_HASHING_METHOD = 'content'
+
 COMPRESS_DATA_URI_MAX_SIZE = 30 * 1024  # 30KB
 
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+COMPRESS_JS_FILTERS = (
+    'compressor.filters.closure.ClosureCompilerFilter',
+)
 
-COMPRESS_OFFLINE = True
+COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar %s' % os.path.join(
+    BIN_ROOT, 'closure_compiler.jar')
 
 #==============================================================================
 # Miscellaneous project settings
