@@ -4,7 +4,7 @@ from django.conf.global_settings import *   # pylint: disable=W0614,W0401
 
 
 #==============================================================================
-# Calculation of directories relative to the project module location
+# Directory setup
 #==============================================================================
 
 import os
@@ -13,25 +13,11 @@ import {{ project_name }} as project_module
 
 PROJECT_DIR = os.path.dirname(os.path.realpath(project_module.__file__))
 
-PYTHON_BIN = os.path.dirname(sys.executable)
-ve_path = os.path.dirname(os.path.dirname(os.path.dirname(PROJECT_DIR)))
-# Assume that the presence of 'activate_this.py' in the python bin/
-# directory means that we're running in a virtual environment.
-if os.path.exists(os.path.join(PYTHON_BIN, 'activate_this.py')):
-    # We're running with a virtualenv python executable.
-    VAR_ROOT = os.path.join(os.path.dirname(PYTHON_BIN), 'var')
-elif ve_path and os.path.exists(os.path.join(ve_path, 'bin',
-        'activate_this.py')):
-    # We're running in [virtualenv_root]/src/[project_name].
-    VAR_ROOT = os.path.join(ve_path, 'var')
-else:
-    # Set the variable root to a path in the project which is
-    # ignored by the repository.
-    VAR_ROOT = os.path.join(PROJECT_DIR, 'var')
+PROJECT_ROOT = os.path.dirname(PROJECT_DIR)
 
-if not os.path.exists(VAR_ROOT):
-    os.mkdir(VAR_ROOT)
+VAR_ROOT = os.path.join(PROJECT_ROOT, 'var')
 
+BIN_ROOT = os.path.join(PROJECT_ROOT, 'bin')
 
 #==============================================================================
 # Generic Django project settings
