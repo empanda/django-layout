@@ -10,8 +10,8 @@ Pre-Requisites
 
 To install all of these system dependencies on a Debian-based system, run::
 
-	sudo apt-get install python-setuptools
-	sudo easy_install virtualenv
+    sudo apt-get install python-setuptools
+    sudo easy_install virtualenv
 
 
 Creating the Virtual Environment
@@ -29,7 +29,7 @@ Installing the Project
 
 Install the requirements and the project source::
 
-	cd path/to/your/{{ project_name }}/repository
+    cd path/to/your/{{ project_name }}/repository
     pip install -r requirements.pip
     pip install -e .
 

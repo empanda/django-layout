@@ -25,4 +25,4 @@ Some common commands::
 From the within the project directory, you can just run ``fab [command]``.
 If you want to run fabric outside of the directory, use::
 
-	fab --fabfile /path/to/project/fabfile.py [command]
+    fab --fabfile /path/to/project/fabfile.py [command]
