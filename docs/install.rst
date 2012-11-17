@@ -38,8 +38,8 @@ configuration files to get started quickly::
 
     cp {{ project_name }}/settings/local.py.example {{ project_name }}/settings/local.py
 
-You'll need to configure the DATABASES setting in ``{{ project_name }}
-/settings/local.py``. Change ``db_user`` and ``db_password`` as needed.
+You'll need to configure the DATABASES setting in ``{{ project_name }}/settings/local.py``.
+Change ``db_user`` and ``db_password`` as needed.
 
 .. code-block:: python
 
