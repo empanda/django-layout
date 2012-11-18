@@ -13,6 +13,7 @@ Contents:
     install
     environments
     deployment
+    requirements
 
 Indices and tables
 ==================

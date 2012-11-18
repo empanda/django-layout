@@ -29,6 +29,8 @@ Install the requirements and the project source::
     pip install -r requirements.pip
     pip install -e .
 
+You can learn more about which requirements are used and why in the
+:doc:`requirements<requirements>` section.
 
 Configuring a Local Environment
 ===============================
