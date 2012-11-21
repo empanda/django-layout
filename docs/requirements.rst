@@ -1,3 +1,5 @@
+.. _requirements:
+
 ============
 Requirements
 ============
@@ -15,6 +17,8 @@ The exact format of the requirements file can be found in ``pip``'s
 `documentation <http://www.pip-installer.org/en/latest/requirements.html>`_.
 
 
+.. _default-requirements-file:
+
 Default Requirements File
 =========================
 
@@ -22,11 +26,16 @@ The default requirements file is broken into sections to make reading it
 clearer.
 
 
+.. _python-requirements:
+
 Python
 ------
 
 These packages are just general packages that make working with Python in
 general easier.
+
+
+.. _ipython-requirement:
 
 ``ipython``
 ^^^^^^^^^^^
@@ -42,6 +51,9 @@ documentation`_.
 Homepage: http://ipython.org/ 
 
 PyPI : http://pypi.python.org/pypi/ipython
+
+
+.. _nose-requirement:
 
 ``nose``
 ^^^^^^^^
@@ -69,11 +81,17 @@ Homepage: https://nose.readthedocs.org/
 
 PyPI : http://pypi.python.org/pypi/nose
 
+
+.. _documentation-requirements:
+
 Documentation
 -------------
 
 These packages are used to document your project. They make the writing
 and publishing documentation fun and easy.
+
+
+.. _sphinx-requirement:
 
 ``Sphinx``
 ^^^^^^^^^^
@@ -90,6 +108,9 @@ Homepage: http://sphinx-doc.org/
 
 PyPI : http://pypi.python.org/pypi/Sphinx
 
+
+.. _jinja-requirement:
+
 ``Jinja``
 ^^^^^^^^^
 
@@ -99,6 +120,9 @@ templating engine for the HTML output.
 Homepage: http://jinja.pocoo.org/
 
 PyPI : http://pypi.python.org/pypi/Jinja
+
+
+.. _pygments-requirement:
 
 ``Pygments``
 ^^^^^^^^^^^^
@@ -110,6 +134,9 @@ Homepage: http://pygments.org/
 
 PyPI : http://pypi.python.org/pypi/Pygments
 
+
+.. _docutils-requirement:
+
 ``docutils``
 ^^^^^^^^^^^^
 
@@ -120,8 +147,16 @@ Homepage: http://docutils.sourceforge.net/
 
 PyPI : http://pypi.python.org/pypi/docutils
 
+
+.. _django-requirements:
+
 Django
 ------
+
+These requirements make Django work at it's best.
+
+
+.. _django-requirement:
 
 ``django``
 ^^^^^^^^^^
@@ -132,6 +167,9 @@ Homepage: https://www.djangoproject.com/
 
 PyPI: http://pypi.python.org/pypi/Django
 
+
+.. _pytz-requirement:
+
 ``pytz``
 ^^^^^^^^
 
@@ -141,6 +179,9 @@ support timezone lookup and conversion when timezone support is enabled.
 Homepage: http://pytz.sourceforge.net/
 
 PyPI: http://pypi.python.org/pypi/pytz/
+
+
+.. _py-bcrypt-requirement:
 
 ``py-bcrypt``
 ^^^^^^^^^^^^^
@@ -157,8 +198,16 @@ Homepage: http://www.mindrot.org/projects/py-bcrypt/
 
 PyPI: http://pypi.python.org/pypi/py-bcrypt/
 
-Django Util Apps
-----------------
+
+.. _django-utility-apps-requirements:
+
+Django Utility Apps
+-------------------
+
+These apps make writing Django applications and site easier.
+
+
+.. _south-requirement:
 
 ``South``
 ^^^^^^^^^
@@ -170,6 +219,9 @@ data migrations.
 Homepage: http://south.aeracode.org/
 
 PyPI: http://pypi.python.org/pypi/South
+
+
+.. _django-secure-requirement:
 
 ``django-secure``
 ^^^^^^^^^^^^^^^^^
@@ -184,6 +236,9 @@ Homepage: https://github.com/carljm/django-secure
 
 PyPI: http://pypi.python.org/pypi/django-secure
 
+
+.. _django-debug-toolbar-requirement:
+
 ``django-debug-toolbar``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -196,6 +251,9 @@ Homepage: https://github.com/django-debug-toolbar/django-debug-toolbar
 
 PyPI: http://pypi.python.org/pypi/django-debug-toolbar
 
+
+.. _django-nose-requirement:
+
 ``django-nose``
 ^^^^^^^^^^^^^^^
 
@@ -206,6 +264,9 @@ setup and tear down the test database.
 Homepage: https://github.com/jbalogh/django-nose
 
 PyPI: http://pypi.python.org/pypi/django-nose
+
+
+.. _factory-boy-requirement:
 
 ``factory_boy``
 ^^^^^^^^^^^^^^^
@@ -219,6 +280,9 @@ Homepage: https://github.com/dnerdy/factory_boy
 
 PyPI: http://pypi.python.org/pypi/factory_boy
 
+
+.. _django-model-utils-requirement:
+
 ``django-model-utils``
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -231,8 +295,16 @@ Homepage: https://github.com/carljm/django-model-utils
 
 PyPI: http://pypi.python.org/pypi/django-model-utils
 
+
+.. _django-apps-requirements:
+
 Django Apps
 -----------
+
+These reusable Django apps, get your Django site up and running quickly.
+
+
+.. _django-compressor-requirement:
 
 ``django_compressor``
 ^^^^^^^^^^^^^^^^^^^^^
@@ -245,6 +317,9 @@ Homepage: https://github.com/jezdez/django_compressor
 
 PyPI: http://pypi.python.org/pypi/django_compressor
 
+
+.. _django-appconf-requirement:
+
 ``django-appconf``
 ^^^^^^^^^^^^^^^^^^
 
@@ -254,6 +329,9 @@ way for reusable Django apps to handle settings.
 Homepage: https://github.com/jezdez/django-appconf
 
 PyPI: http://pypi.python.org/pypi/django-appconf
+
+
+.. _lxml-requirement:
 
 ``lxml``
 ^^^^^^^^
@@ -265,6 +343,9 @@ Homepage: http://lxml.de/
 
 PyPI: http://pypi.python.org/pypi/lxml
 
+
+.. _beautifulsoup-requirement:
+
 ``BeautifulSoup``
 ^^^^^^^^^^^^^^^^^
 
@@ -274,6 +355,9 @@ forgiving HTML and XML parser.
 Homepage: http://www.crummy.com/software/BeautifulSoup/
 
 PyPI: http://pypi.python.org/pypi/BeautifulSoup
+
+
+.. _django-waffle-requirement:
 
 ``django-waffle``
 ^^^^^^^^^^^^^^^^^
@@ -286,6 +370,9 @@ complicated logic like staff status or a weighted percentage.
 Homepage: https://github.com/jsocol/django-waffle
 
 PyPI: http://pypi.python.org/pypi/django-waffle
+
+
+.. _adding-requirements:
 
 Adding Requirements
 ===================
