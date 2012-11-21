@@ -48,9 +48,17 @@ documentation`_.
 
 .. _the official documentation: http://ipython.org/ipython-doc/stable/interactive/tutorial.html
 
-Homepage: http://ipython.org/ 
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/ipython
+
+    Documentation
+        http://ipython.org/ipython-doc/stable/index.html
+
+    Homepage
+        http://ipython.org/
+
+    PyPI
+        http://pypi.python.org/pypi/ipython
 
 
 .. _nose-requirement:
@@ -77,9 +85,13 @@ make your testing experience better and faster.
 
 .. _many other features: https://nose.readthedocs.org/en/latest/plugins/builtin.html
 
-Homepage: https://nose.readthedocs.org/
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/nose
+    Documentation
+        https://nose.readthedocs.org/
+
+    PyPI
+        http://pypi.python.org/pypi/nose
 
 
 .. _documentation-requirements:
@@ -104,9 +116,16 @@ others.
 
 .. _reStructuredText: http://sphinx-doc.org/rest.html
 
-Homepage: http://sphinx-doc.org/
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/Sphinx
+    Documentation
+        http://sphinx-doc.org/contents.html
+
+    Homepage
+        http://sphinx-doc.org/
+
+    PyPI
+        http://pypi.python.org/pypi/Sphinx
 
 
 .. _jinja-requirement:
@@ -117,9 +136,16 @@ PyPI : http://pypi.python.org/pypi/Sphinx
 Jinja is a dependency of Sphinx. It is the package that Sphinx uses as a
 templating engine for the HTML output.
 
-Homepage: http://jinja.pocoo.org/
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/Jinja
+    Documentation
+        http://jinja.pocoo.org/docs/
+
+    Homepage
+        http://jinja.pocoo.org/
+
+    PyPI
+        http://pypi.python.org/pypi/Jinja
 
 
 .. _pygments-requirement:
@@ -130,9 +156,16 @@ PyPI : http://pypi.python.org/pypi/Jinja
 Pygments is a dependency of Sphinx. It is the package that Sphinx uses to
 highlight source code.
 
-Homepage: http://pygments.org/
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/Pygments
+    Documentation
+        http://pygments.org/docs/
+
+    Homepage
+        http://pygments.org/
+
+    PyPI
+        http://pypi.python.org/pypi/Pygments
 
 
 .. _docutils-requirement:
@@ -143,9 +176,16 @@ PyPI : http://pypi.python.org/pypi/Pygments
 docutils is a dependency of Sphinx. It is the package that Sphinx uses to
 parse the reStructuredText markup.
 
-Homepage: http://docutils.sourceforge.net/
+.. seealso::
 
-PyPI : http://pypi.python.org/pypi/docutils
+    Documentation
+        http://docutils.sourceforge.net/docs/index.html
+
+    Homepage
+        http://docutils.sourceforge.net/
+
+    PyPI
+        http://pypi.python.org/pypi/docutils
 
 
 .. _django-requirements:
@@ -163,9 +203,16 @@ These requirements make Django work at it's best.
 
 It's Django, nuf said.
 
-Homepage: https://www.djangoproject.com/
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/Django
+    Documentation
+        https://docs.djangoproject.com/en/1.4/
+
+    Homepage
+        https://www.djangoproject.com/
+
+    PyPI
+        http://pypi.python.org/pypi/Django
 
 
 .. _pytz-requirement:
@@ -176,9 +223,14 @@ PyPI: http://pypi.python.org/pypi/Django
 pytz is a dependency of Django. It is the package that Django uses to
 support timezone lookup and conversion when timezone support is enabled.
 
-Homepage: http://pytz.sourceforge.net/
 
-PyPI: http://pypi.python.org/pypi/pytz/
+.. seealso::
+
+    Documentation
+        http://pytz.sourceforge.net/
+
+    PyPI
+        http://pypi.python.org/pypi/pytz/
 
 
 .. _py-bcrypt-requirement:
@@ -194,9 +246,13 @@ we use it with Django's `BCryptPasswordHasher`_.
 
 .. _BCryptPasswordHasher: https://docs.djangoproject.com/en/1.4/topics/auth/#using-bcrypt-with-django
 
-Homepage: http://www.mindrot.org/projects/py-bcrypt/
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/py-bcrypt/
+    Homepage
+        http://www.mindrot.org/projects/py-bcrypt/
+
+    PyPI
+        http://pypi.python.org/pypi/py-bcrypt/
 
 
 .. _django-utility-apps-requirements:
@@ -216,9 +272,16 @@ South enables migrations for Django models. It has become the de-facto
 standard for migrations in the Django world. It supports both schema and
 data migrations.
 
-Homepage: http://south.aeracode.org/
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/South
+    Documentation:
+        http://south.readthedocs.org/en/latest/
+
+    Homepage
+        http://south.aeracode.org/
+
+    PyPI
+        http://pypi.python.org/pypi/South
 
 
 .. _django-secure-requirement:
@@ -232,9 +295,16 @@ apply easy security wins usually through the use of specific headers. It
 works best with sites that use SSL, but it also provides some benefit for
 those who don't.
 
-Homepage: https://github.com/carljm/django-secure
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-secure
+    Documentation
+        http://django-secure.readthedocs.org/en/latest/
+
+    Homepage
+        https://github.com/carljm/django-secure
+
+    PyPI
+        http://pypi.python.org/pypi/django-secure
 
 
 .. _django-debug-toolbar-requirement:
@@ -247,9 +317,13 @@ information to the HTML pages that Django produces while ``DEBUG = True``.
 It has panels showing information about SQL queries, templates, settings,
 etc.
 
-Homepage: https://github.com/django-debug-toolbar/django-debug-toolbar
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-debug-toolbar
+    Documentation
+        https://github.com/django-debug-toolbar/django-debug-toolbar
+
+    PyPI
+        http://pypi.python.org/pypi/django-debug-toolbar
 
 
 .. _django-nose-requirement:
@@ -261,9 +335,13 @@ django-nose is a simple package that provides a Django test runner that
 will use nose under the covers. It makes sure that nose will correctly
 setup and tear down the test database.
 
-Homepage: https://github.com/jbalogh/django-nose
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-nose
+    Documentation
+        https://github.com/jbalogh/django-nose
+
+    PyPI
+        http://pypi.python.org/pypi/django-nose
 
 
 .. _factory-boy-requirement:
@@ -276,9 +354,16 @@ factories for using in tests. It can be used to create a complex set of
 related models which can then be tested against. It is a good alternative
 to fixtures.
 
-Homepage: https://github.com/dnerdy/factory_boy
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/factory_boy
+    Documentation
+        https://factoryboy.readthedocs.org/en/latest/
+
+    Homepage
+        https://github.com/dnerdy/factory_boy
+
+    PyPI
+        http://pypi.python.org/pypi/factory_boy
 
 
 .. _django-model-utils-requirement:
@@ -291,9 +376,13 @@ Django models. It incorperates the logic of a lot of different common
 model uses, ie ``TimeFramedModel``, ``StatusModel``, and
 ``TimeStampedModel``.
 
-Homepage: https://github.com/carljm/django-model-utils
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-model-utils
+    Documentation
+        https://github.com/carljm/django-model-utils
+
+    PyPI
+        http://pypi.python.org/pypi/django-model-utils
 
 
 .. _django-apps-requirements:
@@ -313,9 +402,16 @@ django_compressor is a package that extends Django's handling of static
 assets. It will combine and minify your CSS and JS assets into files with
 unique names that can be cached forever on the client. 
 
-Homepage: https://github.com/jezdez/django_compressor
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django_compressor
+    Documentation
+        http://django_compressor.readthedocs.org/en/latest/
+
+    Homepage
+        https://github.com/jezdez/django_compressor
+
+    PyPI
+        http://pypi.python.org/pypi/django_compressor
 
 
 .. _django-appconf-requirement:
@@ -326,9 +422,16 @@ PyPI: http://pypi.python.org/pypi/django_compressor
 django-appconf is a dependency of django_compressor. It provides a unified
 way for reusable Django apps to handle settings.
 
-Homepage: https://github.com/jezdez/django-appconf
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-appconf
+    Documentation
+        https://django-appconf.readthedocs.org/en/latest/
+
+    Homepage
+        https://github.com/jezdez/django-appconf
+
+    PyPI
+        http://pypi.python.org/pypi/django-appconf
 
 
 .. _lxml-requirement:
@@ -339,9 +442,16 @@ PyPI: http://pypi.python.org/pypi/django-appconf
 lxml is a dependency of django_compressor. It is an extremely fast HTML
 and XML parser.
 
-Homepage: http://lxml.de/
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/lxml
+    Documentation
+        http://lxml.de/index.html#documentation
+
+    Homepage
+        http://lxml.de/
+
+    PyPI
+        http://pypi.python.org/pypi/lxml
 
 
 .. _beautifulsoup-requirement:
@@ -352,9 +462,16 @@ PyPI: http://pypi.python.org/pypi/lxml
 BeautifulSoup is a dependency of django_compressor. It is a slow but very
 forgiving HTML and XML parser.
 
-Homepage: http://www.crummy.com/software/BeautifulSoup/
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/BeautifulSoup
+    Documentation
+        http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+    Homepage
+        http://www.crummy.com/software/BeautifulSoup/
+
+    PyPI
+        http://pypi.python.org/pypi/BeautifulSoup
 
 
 .. _django-waffle-requirement:
@@ -367,9 +484,16 @@ provides a way to turn features of your app on and off depending on a set
 of rules. The rules can be as simple as a switch, or more based on more
 complicated logic like staff status or a weighted percentage.
 
-Homepage: https://github.com/jsocol/django-waffle
+.. seealso::
 
-PyPI: http://pypi.python.org/pypi/django-waffle
+    Documentation
+        http://waffle.readthedocs.org/en/latest/index.html
+
+    Homepage
+        https://github.com/jsocol/django-waffle
+
+    PyPI
+        http://pypi.python.org/pypi/django-waffle
 
 
 .. _adding-requirements:
