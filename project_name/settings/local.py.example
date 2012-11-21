@@ -161,4 +161,8 @@ if SSL:
     CSRF_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
     WAFFLE_SECURE = True
-    # SECURE_HSTS_SECONDS = 
+    # SECURE_HSTS_SECONDS =
+
+#==============================================================================
+# Miscellaneous project settings
+#==============================================================================
