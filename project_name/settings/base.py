@@ -124,8 +124,6 @@ MIDDLEWARE_CLASSES += (
 # Security settings
 #==============================================================================
 
-SECRET_KEY = '{{ secret_key }}'
-
 X_FRAME_OPTIONS = 'DENY'
 
 INTERNAL_IPS = ('127.0.0.1',)
