@@ -82,6 +82,9 @@ LOGGING = {
         'verbose': {
             'format': '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s',
         },
+        'json': {
+            '()': '{{ project_name }}.utils.logging.formatters.JSONFormatter',
+        },
     },
     'filters': {
         'require_debug_false': {
@@ -89,22 +92,40 @@ LOGGING = {
         },
     },
     'handlers': {
+        'null': {
+            'class': 'django.utils.log.NullHandler',
+        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'null': {
-            'class': 'django.utils.log.NullHandler',
+        'rotating_file': {
+            'level': 'DEBUG',
+            'filters': [],
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'json',
+            'encoding': 'utf8',
+            'filename': os.path.join(VAR_ROOT, 'log', 'app.json.log'),
+            'maxbytes': (1024 * 1024) * 10,  # 50 MB
+            'backupCount': 1,
+        },
+        'watched_file': {
+            'level': 'DEBUG',
+            'filters': [],
+            'class': 'logging.handlers.WatchedFileHandler',
+            'formatter': 'json',
+            'encoding': 'utf8',
+            'filename': os.path.join(VAR_ROOT, 'log', 'app.json.log'),
         },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
     },
     'root': {
-        'handlers': ['mail_admins', 'console'],
+        'handlers': ['mail_admins', 'console', 'rotating_file'],
         'level': 'DEBUG',
     },
     'loggers': {
