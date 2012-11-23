@@ -23,9 +23,6 @@ BIN_ROOT = os.path.join(PROJECT_ROOT, 'bin')
 # Generic Django project settings
 #==============================================================================
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
 SITE_ID = 1
 
 #==============================================================================
