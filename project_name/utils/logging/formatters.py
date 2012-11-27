@@ -65,7 +65,7 @@ class JSONFormatter(logging.Formatter):
         'msg', 'args', 'exc_text', 'name', 'thread', 'created', 'threadName',
         'msecs', 'pathname', 'exc_info', 'levelname'])
 
-    def __init__(self, layout=None, json_encoder=None):
+    def __init__(self, layout=None, json_encoder=ExtendedJSONEncoder):
         """
         You can specify two different options to custimize the final JSON
         output.
