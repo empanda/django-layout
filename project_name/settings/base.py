@@ -151,6 +151,18 @@ PASSWORD_HASHERS = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 #==============================================================================
+# Email settings
+#==============================================================================
+
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+EMAIL_HOST = 'localhost'
+
+EMAIL_SUBJECT_PREFIX = '[Django - {{ project_name }}] '
+
+#==============================================================================
 # Django Compressor settings
 #==============================================================================
 

@@ -55,21 +55,7 @@ CACHES = {
 # Email settings
 #==============================================================================
 
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
-
 EMAIL_HOST = 'localhost'
-
-EMAIL_HOST_USER = ''
-
-EMAIL_HOST_PASSWORD = ''
-
-EMAIL_PORT = ''
-
-EMAIL_USE_TLS = False
-
-EMAIL_SUBJECT_PREFIX = '[Django - {{ project_name }}]'
 
 #==============================================================================
 # Logging settings
