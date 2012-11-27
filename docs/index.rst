@@ -14,6 +14,7 @@ Contents:
     environments
     requirements
     settings
+    templates
 
 Indices and tables
 ==================
