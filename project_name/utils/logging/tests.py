@@ -2,23 +2,58 @@ from django.utils import unittest
 import json
 import decimal
 import uuid
+import datetime
+import sys
+
+import mock
+from django.test.client import RequestFactory
 
 from .formatters import JSONFormatter, ExtendedJSONEncoder
 
 
 class ExtendedJSONEncoderTests(unittest.TestCase):
+    def assertExtendedJSONEncoderReturns(self, input, expected):
+        """A shorthand assertion for ExtendedJSONEncoder.default() equality."""
+        self.assertEqual(ExtendedJSONEncoder().default(input), expected)
+
+    def test_supports_datetime_objects(self):
+        """ExtendedJSONEncoder should return a JSON representation of a datetime.datetime."""
+        dt = datetime.datetime(2012, 11, 26, 17, 28, 40, 56808)
+        self.assertExtendedJSONEncoderReturns(dt, '2012-11-26T17:28:40.056')
+
+    def test_supports_date_objects(self):
+        """ExtendedJSONEncoder should return a JSON representation of a datetime.date."""
+        d = datetime.date(2012, 11, 26)
+        self.assertExtendedJSONEncoderReturns(d, '2012-11-26')
+
+    def test_supports_time_objects(self):
+        """ExtendedJSONEncoder should return a JSON representation of a datetime.time."""
+        t = datetime.time(17, 28, 40, 56808)
+        self.assertExtendedJSONEncoderReturns(t, '17:28:40.056')
+
+    def test_supports_decimal_objects(self):
+        """ExtendedJSONEncoder should return a JSON representation of a decimal.Decimal."""
+        d = decimal.Decimal('1.51')
+        self.assertExtendedJSONEncoderReturns(d, '1.51')
+
     def test_supports_uuid_objects(self):
-        """ExtendedJSONEncoder should return the string representation of a UUID."""
-        eje = ExtendedJSONEncoder()
+        """ExtendedJSONEncoder should return a JSON representation of a uuid.UUID."""
         id = uuid.uuid4()
-        output = eje.default(id)
-        self.assertEqual(output, str(id))
+        self.assertExtendedJSONEncoderReturns(id, str(id))
+
+    def test_supports_httprequest_objects(self):
+        """ExtendedJSONEncoder should return a JSON representation of a django.http.HttpRequest."""
+        r = RequestFactory().get('/')
+        self.assertExtendedJSONEncoderReturns(r, {'method': 'GET',
+            'session': None, 'META': {'HTTP_COOKIE': ''}, 'user': None,
+            'id': None, 'path_info': u'/'})
+
 
 class JSONFormatterTests(unittest.TestCase):
     def test_out_is_valid_json(self):
         """JSONFormatter should output valid JSON."""
         formatter = JSONFormatter()
-        output = formatter.format(FakeLogRecord())
+        output = formatter.format(self.FakeLogRecord())
 
         self.assertIsInstance(json.loads(output), dict)
 
@@ -36,7 +71,7 @@ class JSONFormatterTests(unittest.TestCase):
         }
 
         formatter = JSONFormatter()
-        output_json = formatter.format(FakeLogRecord())
+        output_json = formatter.format(self.FakeLogRecord())
         output = json.loads(output_json)
 
         self.assertEqual(output, expected_output)
@@ -59,7 +94,7 @@ class JSONFormatterTests(unittest.TestCase):
         }
 
         formatter = JSONFormatter(layout=custom_layout)
-        output_json = formatter.format(FakeLogRecord())
+        output_json = formatter.format(self.FakeLogRecord())
         output = json.loads(output_json)
 
         self.assertEqual(output, expected_output)
@@ -71,7 +106,7 @@ class JSONFormatterTests(unittest.TestCase):
         expected_output = {'ip': '127.0.0.1', 'foo': 'asfd'}
 
         formatter = JSONFormatter()
-        output = formatter.process_extra(FakeLogRecord())
+        output = formatter.process_extra(self.FakeLogRecord())
 
         self.assertEqual(output, expected_output)
 
@@ -79,21 +114,17 @@ class JSONFormatterTests(unittest.TestCase):
         """
         JSONFormatter should use a custom JSON encoder if it is specified.
         """
-        expected_output = {'extra': {'ip': '127.0.0.1', 'foo': '101.03'}}
         custom_layout = {'extra': ''}
-
+        mocked_json_encoder = mock.MagicMock()
         formatter = JSONFormatter(
             layout=custom_layout,
-            json_encoder=DecimalJSONEncoder
+            json_encoder=mocked_json_encoder
         )
 
-        record = FakeLogRecord()
-        record.foo = decimal.Decimal('101.03')
+        record = self.FakeLogRecord()
 
-        output_json = formatter.format(record)
-        output = json.loads(output_json)
-
-        self.assertEqual(output, expected_output)
+        formatter.format(record)
+        self.assertTrue(mocked_json_encoder.called)
 
     def test_formatDate(self):
         """
@@ -107,37 +138,44 @@ class JSONFormatterTests(unittest.TestCase):
 
         self.assertEqual(output, expected_output)
 
+    def test_proccess_exception(self):
+        """
+        JSONFormatter.process_exception should return a dictionary with exception info.
+        """
+        formatter = JSONFormatter()
 
-class FakeLogRecord(object):
-    """A fake log record for testing."""
-    def __init__(self):
-        self.args = ['foo']
-        self.levelname = 'DEBUG'
-        self.levelno = 10
-        self.pathname = 'test.py'
-        self.filename = 'test.py'
-        self.process = 7821
-        self.processName = 'MainProcess'
-        self.threadName = 'MainThread'
-        self.thread = 140735211397504
-        self.funcName = 'main'
-        self.lineno = 116
-        self.module = 'test'
-        self.relativeCreated = 8.126974105834961
-        self.created = 1353454259.111096
-        self.name = 'main'
-        self.msg = 'in main function %s'
-        self.ip = '127.0.0.1'
-        self.foo = 'asfd'
+        try:
+            5 + 'boom!'
+        except TypeError:
+            exc_info = sys.exc_info()
 
-    def getMessage(self):
-        return self.msg % self.args
+        output = formatter.process_exception(exc_info)
+        self.assertEqual(output['type'], "<type 'exceptions.TypeError'>")
+        self.assertEqual(output['value'], "unsupported operand type(s) for +: 'int' and 'str'")
+        self.assertEqual(output['traceback'][0]['function_name'], 'test_proccess_exception')
 
+    class FakeLogRecord(object):
+        """A fake log record for testing."""
+        def __init__(self):
+            self.args = ['foo']
+            self.levelname = 'DEBUG'
+            self.levelno = 10
+            self.pathname = 'test.py'
+            self.filename = 'test.py'
+            self.process = 7821
+            self.processName = 'MainProcess'
+            self.threadName = 'MainThread'
+            self.thread = 140735211397504
+            self.funcName = 'main'
+            self.lineno = 116
+            self.module = 'test'
+            self.relativeCreated = 8.126974105834961
+            self.created = 1353454259.111096
+            self.name = 'main'
+            self.exc_info = None
+            self.msg = 'in main function %s'
+            self.ip = '127.0.0.1'
+            self.foo = 'asfd'
 
-class DecimalJSONEncoder(json.JSONEncoder):
-    """A JSON encoder that understands decimal objects."""
-    def default(self, o):
-        if isinstance(o, decimal.Decimal):
-            return str(o)
-        else:
-            return super(DecimalJSONEncoder, self).default(o)
+        def getMessage(self):
+            return self.msg % self.args

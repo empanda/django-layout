@@ -2,27 +2,60 @@ import logging
 import json
 import datetime
 import uuid
+import decimal
+import traceback
 
-from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpRequest
+from django.utils.timezone import is_aware
 
 
-class ExtendedJSONEncoder(DjangoJSONEncoder):
+class ExtendedJSONEncoder(json.JSONEncoder):
     """
-    A JSON encoder that understands Django HttpRequest and UUID objects.
+    A JSON encoder that understands more Python types, including:
+      * datetime.datetime
+      * datetime.date
+      * datetime.time
+      * decimal.Decimal
+      * uuid.UUID
+      * django.http.HttpRequest
 
-    The DjangoJSONEncoder already supports date/time and decimal types.
+    This is mostly copied from django.core.serializers.json.DjangoJSONEncoder.
+    We don't subclass that because of a lot dependencies that cause problems
+    during settings initialization.
 
     For Django HttpRequest objects it returns a dictionary containing the
     session key, the user id, the path, the method, any HTTP headers and the id
     of the request.
-
-    For UUID objects it returns their string representation. 
     """
     def default(self, o):
-        if isinstance(o, HttpRequest):
+        if isinstance(o, datetime.datetime):
+            r = o.isoformat()
+            if o.microsecond:
+                r = r[:23] + r[26:]
+            if r.endswith('+00:00'):
+                r = r[:-6] + 'Z'
+            return r
+
+        elif isinstance(o, datetime.date):
+            return o.isoformat()
+
+        elif isinstance(o, datetime.time):
+            if is_aware(o):
+                raise ValueError("JSON can't represent timezone-aware times.")
+            r = o.isoformat()
+            if o.microsecond:
+                r = r[:12]
+            return r
+
+        elif isinstance(o, decimal.Decimal):
+            return str(o)
+
+        elif isinstance(o, uuid.UUID):
+            return str(o)
+
+        elif isinstance(o, HttpRequest):
             request = o
-            sr = {
+            r = {
                 'session': getattr(getattr(request, 'session', None), '_session_key', None),
                 'user': getattr(getattr(request, 'user', None), 'id', None),
                 'path_info': request.path_info,
@@ -30,9 +63,8 @@ class ExtendedJSONEncoder(DjangoJSONEncoder):
                 'id': getattr(request, 'id', None),
                 'META': dict([(key, value)for key, value in request.META.iteritems() if key.startswith('HTTP_')]),
             }
-            return sr
-        elif isinstance(o, uuid.UUID):
-            return str(o)
+            return r
+
         else:
             return super(ExtendedJSONEncoder, self).default(o)
 
@@ -58,6 +90,7 @@ class JSONFormatter(logging.Formatter):
         'process': ['thread', 'threadName', 'process', 'processName'],
         'message': ['message', 'msg', 'args'],
         'extra': 'all the extra parameters will go here',
+        'exception': 'filled with exception info when an exception occurs',
     }
 
     default_fields = set(['relativeCreated', 'process', 'module', 'funcName',
@@ -95,6 +128,19 @@ class JSONFormatter(logging.Formatter):
             extra[key] = getattr(record, key)
         return extra
 
+    def process_exception(self, exc_info):
+        """
+        Returns a dictionary with all the exception info included.
+
+        The traceback is rendered in a JSON friendly way.
+        """
+        return {
+            'type': unicode(exc_info[0]),
+            'value': unicode(exc_info[1]),
+            'traceback': [{'filename': st[0], 'line_number': st[1], 'function_name': st[2], 'text': st[3]}
+                            for st in traceback.extract_tb(exc_info[2])],
+        }
+
     def fill_layout(self, record, layout):
         """
         Returns a dictionary of nested dictionaries with data from the
@@ -106,6 +152,12 @@ class JSONFormatter(logging.Formatter):
             if name is 'extra':
                 final['extra'] = self.process_extra(record)
                 continue
+
+            if name is 'exception':
+                if record.exc_info:
+                    final['exception'] = self.process_exception(record.exc_info)
+                continue
+
             final[name] = {}
             for field in fields:
                 final[name][field] = getattr(record, field)
