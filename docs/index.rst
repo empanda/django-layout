@@ -14,6 +14,7 @@ Contents:
     environments
     deployment
     requirements
+    settings
 
 Indices and tables
 ==================
