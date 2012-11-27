@@ -93,6 +93,9 @@ make your testing experience better and faster.
     PyPI
         http://pypi.python.org/pypi/nose
 
+
+.. _mock-requirement:
+
 ``mock``
 ^^^^^^^^
 
