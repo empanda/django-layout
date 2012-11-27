@@ -93,7 +93,7 @@ LOGGING = {
             'formatter': 'json',
             'encoding': 'utf8',
             'filename': os.path.join(VAR_ROOT, 'log', 'app.json.log'),
-            'maxbytes': (1024 * 1024) * 10,  # 50 MB
+            'maxBytes': (1024 * 1024) * 10,  # 50 MB
             'backupCount': 1,
         },
         'watched_file': {
