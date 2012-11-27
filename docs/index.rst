@@ -12,7 +12,6 @@ Contents:
 
     install
     environments
-    deployment
     requirements
     settings
 
