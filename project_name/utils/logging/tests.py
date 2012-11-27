@@ -1,9 +1,18 @@
 from django.utils import unittest
 import json
 import decimal
+import uuid
 
-from .formatters import JSONFormatter
+from .formatters import JSONFormatter, ExtendedJSONEncoder
 
+
+class ExtendedJSONEncoderTests(unittest.TestCase):
+    def test_supports_uuid_objects(self):
+        """ExtendedJSONEncoder should return the string representation of a UUID."""
+        eje = ExtendedJSONEncoder()
+        id = uuid.uuid4()
+        output = eje.default(id)
+        self.assertEqual(output, str(id))
 
 class JSONFormatterTests(unittest.TestCase):
     def test_out_is_valid_json(self):

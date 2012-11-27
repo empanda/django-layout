@@ -1,6 +1,40 @@
 import logging
 import json
 import datetime
+import uuid
+
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpRequest
+
+
+class ExtendedJSONEncoder(DjangoJSONEncoder):
+    """
+    A JSON encoder that understands Django HttpRequest and UUID objects.
+
+    The DjangoJSONEncoder already supports date/time and decimal types.
+
+    For Django HttpRequest objects it returns a dictionary containing the
+    session key, the user id, the path, the method, any HTTP headers and the id
+    of the request.
+
+    For UUID objects it returns their string representation. 
+    """
+    def default(self, o):
+        if isinstance(o, HttpRequest):
+            request = o
+            sr = {
+                'session': getattr(getattr(request, 'session', None), '_session_key', None),
+                'user': getattr(getattr(request, 'user', None), 'id', None),
+                'path_info': request.path_info,
+                'method': request.method,
+                'id': getattr(request, 'id', None),
+                'META': dict([(key, value)for key, value in request.META.iteritems() if key.startswith('HTTP_')]),
+            }
+            return sr
+        elif isinstance(o, uuid.UUID):
+            return str(o)
+        else:
+            return super(ExtendedJSONEncoder, self).default(o)
 
 
 class JSONFormatter(logging.Formatter):
