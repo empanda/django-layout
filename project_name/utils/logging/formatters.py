@@ -80,6 +80,8 @@ class JSONFormatter(logging.Formatter):
     def formatDate(self, timestamp):
         """
         Format `asctime` into the standard ISO format.
+
+        The datetime is in UTC by default thus the 'Z' at the end.
         """
         dt = datetime.datetime.utcfromtimestamp(timestamp)
         r = dt.isoformat() + 'Z'
