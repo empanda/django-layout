@@ -513,6 +513,161 @@ complicated logic like staff status or a weighted percentage.
         http://pypi.python.org/pypi/django-waffle
 
 
+.. _celery-requirements:
+
+Celery
+------
+
+`Celery`_ is a distributed task queue for Python. We use it to enable out of
+process execution. This means that the request/response cycle isn't slowed
+down by slow steps like sending email.
+
+.. _Celery: http://celeryproject.org/
+
+.. _celery-requirement:
+
+``celery``
+^^^^^^^^^^
+
+The base celery package. Provides all the celery task functionality.
+
+.. seealso::
+
+    Documentation
+        http://docs.celeryproject.org/en/latest/index.html
+
+    Homepage
+        http://celeryproject.org/
+
+    PyPI
+        http://pypi.python.org/pypi/celery/
+
+
+.. _django-celery-requirement:
+
+``django-celery``
+^^^^^^^^^^^^^^^^^
+
+An add-on for celery that increases it's functionality in a Django
+environment. It handles loading your Django environment before running
+tasks and adds all the celery commands to the ``manage.py`` interface.
+
+.. seealso::
+
+    Documentation
+        http://docs.celeryproject.org/en/latest/django/
+
+    PyPI
+        http://pypi.python.org/pypi/django-celery
+
+
+.. _billiard-requirement:
+
+``billiard``
+^^^^^^^^^^^^
+
+billiard is a dependency of celery. It is a Python multiprocessing
+fork with improvements and bugfixes.
+
+.. seealso::
+
+    Homepage
+        https://github.com/celery/billiard
+
+    PyPI
+        http://pypi.python.org/pypi/billiard
+
+
+
+.. _amqplib-requirement:
+
+``amqplib``
+^^^^^^^^^^^
+
+amqplib is a dependency of celery. It is a :abbr:`AMQP (Advanced Message
+Queuing Protocol)` client library.
+
+.. seealso::
+
+    Homepage
+        http://code.google.com/p/py-amqplib/
+
+    PyPI
+        http://pypi.python.org/pypi/amqplib
+
+.. _kombu-requirement:
+
+``kombu``
+^^^^^^^^^
+
+kombu is a dependency of celery. It provides a high level interface for
+:abbr:`AMQP (Advanced Message Queuing Protocol)` on top of amqplib.
+
+.. seealso::
+
+    Documentation
+        http://kombu.readthedocs.org/en/latest/
+
+    PyPI
+        http://pypi.python.org/pypi/kombu
+
+.. _anyjson-requirement:
+
+``anyjson``
+^^^^^^^^^^^
+
+anyjson is a dependency of celery. It is a library that normalizes all the
+various JSON processing packages for Python.
+
+.. seealso::
+
+    Homepage
+        https://bitbucket.org/runeh/anyjson
+
+    PyPI
+        http://pypi.python.org/pypi/anyjson
+
+.. _python-dateutil-requirement:
+
+``python-dateutil``
+^^^^^^^^^^^^^^^^^^^
+
+python-dateutil is a dependency of celery. It is a library for working
+with dates and times.
+
+
+.. seealso::
+
+    Homepage
+        http://labix.org/python-dateutil
+
+    PyPI
+        http://pypi.python.org/pypi/python-dateutil
+
+
+
+.. _redis-requirement:
+
+``redis``
+^^^^^^^^^
+
+redis is a required to use celery with this `Redis backend`_. It is not a
+requirement of the basic celery install. `Redis`_ is a very fast key-value
+store that is simple to setup and run.
+
+.. _Redis backend: http://docs.celeryproject.org/en/latest/getting-started/brokers/redis.html
+
+.. _Redis: http://redis.io/
+
+.. seealso::
+
+    Homepage
+        https://github.com/andymccurdy/redis-py
+
+    PyPI
+        http://pypi.python.org/pypi/redis/
+
+
 .. _adding-requirements:
 
 Adding Requirements

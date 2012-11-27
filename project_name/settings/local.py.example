@@ -137,6 +137,18 @@ SSL = False
 # USE_X_FORWARDED_HOST = True
 
 #==============================================================================
+# Celery settings
+#==============================================================================
+
+BROKER_URL = 'redis://'
+
+CELERY_RESULT_BACKEND = 'redis://'
+
+CELERY_ALWAYS_EAGER = DEBUG
+
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = CELERY_ALWAYS_EAGER
+
+#==============================================================================
 # Conditional settings
 #==============================================================================
 

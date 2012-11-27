@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'waffle',
     'django_nose',
     'djangosecure',
+    'djcelery',
 
     # Django Apps
     'django.contrib.auth',
@@ -189,6 +190,17 @@ COMPRESS_JS_FILTERS = (
 
 COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar %s' % os.path.join(
     BIN_ROOT, 'closure_compiler.jar')
+
+#==============================================================================
+# Celery settings
+#==============================================================================
+
+import djcelery
+djcelery.setup_loader()
+
+CELERY_TIMEZONE = TIME_ZONE
+
+CELERYD_HIJACK_ROOT_LOGGER = False
 
 #==============================================================================
 # Miscellaneous project settings
