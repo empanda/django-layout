@@ -93,6 +93,20 @@ make your testing experience better and faster.
     PyPI
         http://pypi.python.org/pypi/nose
 
+``mock``
+^^^^^^^^
+
+mock is a mocking library for Python tests. It is simple to use and very
+handy when writing fast tests.
+
+.. seealso::
+
+    Documentation
+        http://www.voidspace.org.uk/python/mock/
+
+    PyPI
+        http://pypi.python.org/pypi/mock
+
 
 .. _documentation-requirements:
 

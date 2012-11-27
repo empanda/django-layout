@@ -7,6 +7,7 @@
 # Python
 ipython==0.13.1
 nose==1.2.1
+mock==1.0.1
 
 # Sphinx
 Sphinx==1.1.3
