@@ -75,3 +75,13 @@ class RequestIdMiddlewareTests(unittest.TestCase):
         response, header, request_id = self.get_process_response(response=response)
 
         self.assertEqual(header, 'existing')
+
+    def test_process_response_warns_when_not_adding(self):
+        """RequestIdMiddleware should log a warnning when not overriding an existing header on the response."""
+        mock_logger = mock.MagicMock()
+        rim = RequestIdMiddleware(logger=mock_logger)
+        response = HttpResponse()
+        response[rim.REQUEST_ID_HEADER] = 'existing'
+        response, header, request_id = self.get_process_response(response=response)
+
+        self.assertTrue(mock_logger.warnning.called)
