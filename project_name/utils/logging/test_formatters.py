@@ -1,52 +1,10 @@
 from django.utils import unittest
 import json
-import decimal
-import uuid
-import datetime
 import sys
 
 import mock
-from django.test.client import RequestFactory
 
-from .formatters import JSONFormatter, ExtendedJSONEncoder
-
-
-class ExtendedJSONEncoderTests(unittest.TestCase):
-    def assertExtendedJSONEncoderReturns(self, input, expected):
-        """A shorthand assertion for ExtendedJSONEncoder.default() equality."""
-        self.assertEqual(ExtendedJSONEncoder().default(input), expected)
-
-    def test_supports_datetime_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a datetime.datetime."""
-        dt = datetime.datetime(2012, 11, 26, 17, 28, 40, 56808)
-        self.assertExtendedJSONEncoderReturns(dt, '2012-11-26T17:28:40.056')
-
-    def test_supports_date_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a datetime.date."""
-        d = datetime.date(2012, 11, 26)
-        self.assertExtendedJSONEncoderReturns(d, '2012-11-26')
-
-    def test_supports_time_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a datetime.time."""
-        t = datetime.time(17, 28, 40, 56808)
-        self.assertExtendedJSONEncoderReturns(t, '17:28:40.056')
-
-    def test_supports_decimal_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a decimal.Decimal."""
-        d = decimal.Decimal('1.51')
-        self.assertExtendedJSONEncoderReturns(d, '1.51')
-
-    def test_supports_uuid_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a uuid.UUID."""
-        id = uuid.uuid4()
-        self.assertExtendedJSONEncoderReturns(id, str(id))
-
-    def test_supports_httprequest_objects(self):
-        """ExtendedJSONEncoder should return a JSON representation of a django.http.HttpRequest."""
-        r = RequestFactory().get('/')
-        self.assertExtendedJSONEncoderReturns(r, {'method': 'GET',
-            'session': None, 'META': {'HTTP_COOKIE': ''}, 'user': None,
-            'id': None, 'path_info': u'/'})
+from .formatters import JSONFormatter
 
 
 class JSONFormatterTests(unittest.TestCase):
