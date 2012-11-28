@@ -4,7 +4,6 @@ import uuid
 import datetime
 import Cookie
 
-import mock
 from django.test.client import RequestFactory
 from django.http import HttpResponse
 
