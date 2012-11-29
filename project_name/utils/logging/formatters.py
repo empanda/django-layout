@@ -59,11 +59,8 @@ class JSONFormatter(logging.Formatter):
         LogRecord and the actual set of keys. These additional fields are the
         `extra` fields for the LogRecord.
         """
-        extra = {}
         extra_keys = set(record.__dict__.keys()).difference(self.default_fields)
-        for key in extra_keys:
-            extra[key] = getattr(record, key)
-        return extra
+        return dict([(key, getattr(record, key)) for key in extra_keys])
 
     def process_exception(self, exc_info):
         """
