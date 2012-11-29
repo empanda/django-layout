@@ -71,11 +71,11 @@ class JSONFormatter(logging.Formatter):
 
         The traceback is rendered in a JSON friendly way.
         """
+        st_fields = ['filename', 'line_number', 'function_name', 'text']
         return {
             'type': unicode(exc_info[0]),
             'value': unicode(exc_info[1]),
-            'traceback': [{'filename': st[0], 'line_number': st[1], 'function_name': st[2], 'text': st[3]}
-                            for st in traceback.extract_tb(exc_info[2])],
+            'traceback': [dict(zip(st_fields, st) for st in traceback.extract_tb(exc_info[2])],
         }
 
     def fill_layout(self, record, layout):
