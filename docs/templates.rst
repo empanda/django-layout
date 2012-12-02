@@ -56,7 +56,7 @@ title
 
 .. code-block:: django
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% templatetag openblock %} block title {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}</title>
 
 The ``<title>`` element contents can be set using the ``title`` block.
 
@@ -65,7 +65,7 @@ description
 
 .. code-block:: django
 
-    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="description" content="{% templatetag openblock %} block meta_description {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}">
 
 The meta description can be set using the ``meta_description`` block.
 
@@ -74,7 +74,7 @@ author
 
 .. code-block:: django
 
-    <meta name="author" content="{% block meta_author %}{% endblock %}">
+    <meta name="author" content="{% templatetag openblock %} block meta_author {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}">
 
 The meta author can be set using the ``meta_author`` block.
 
@@ -93,10 +93,10 @@ bootstrap.css
 
 .. code-block:: django
 
-    {% compress css %}
-      <link rel="stylesheet" href="{{ STATIC_URL }}vendor/css/bootstrap.css">
-      <link rel="stylesheet" href="{{ STATIC_URL }}vendor/css/bootstrap-responsive.css">
-    {% endcompress %}
+    {% templatetag openblock %} compress css {% templatetag closeblock %}
+      <link rel="stylesheet" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}vendor/css/bootstrap.css">
+      <link rel="stylesheet" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}vendor/css/bootstrap-responsive.css">
+    {% templatetag openblock %} endcompress {% templatetag closeblock %}
 
 Django compressor is used to combine and minify the Twitter Bootstrap
 files. This way we can use the development versions while in development
@@ -108,16 +108,16 @@ main.css
 
 .. code-block:: django
 
-    {% compress css %}
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-    {% endcompress %}
+    {% templatetag openblock %} compress css {% templatetag closeblock %}
+      <link rel="stylesheet" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}css/main.css">
+    {% templatetag openblock %} endcompress {% templatetag closeblock %}
 
 Django Compressor is also used when referencing our CSS files internally.
 
 Because we Django Compressor here you should aim to keep your CSS in
 logical files and not just include all the properties in ``main.css``.  To
 include additional CSS files, just list them after ``main.css`` inside the
-``{% compress css %}`` block.
+``{% templatetag openblock %} compress css {% templatetag closeblock %}`` block.
 
 HTML5 Shiv
 ^^^^^^^^^^
@@ -125,9 +125,9 @@ HTML5 Shiv
 .. code-block:: html
 
     <!--[if lt IE 9]>
-    {% compress js %}
-      <script src="{{ STATIC_URL }}vendor/js/html5shiv-printshiv.js"></script>
-    {% endcompress %}
+    {% templatetag openblock %} compress js {% templatetag closeblock %}
+      <script src="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}vendor/js/html5shiv-printshiv.js"></script>
+    {% templatetag openblock %} endcompress {% templatetag closeblock %}
     <![endif]-->
 
 Use the html5shiv for IE 8. This allows us to use HTML5 elements without
@@ -138,7 +138,7 @@ REQUEST_ID
 
 .. code-block:: django
 
-    <script>var REQUEST_ID='{{ request.id }}';</script>
+    <script>var REQUEST_ID='{% templatetag openvariable %} request.id {% templatetag closevariable %}';</script>
 
 The unique ``request.id`` attribute for the request. This can be useful
 for debugging and error reporting.
@@ -148,11 +148,11 @@ icons
 
 .. code-block:: django
 
-    <link rel="shortcut icon" href="{{ STATIC_URL }}ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}ico/apple-touch-icon-57-precomposed.png">
 
 The list of icons for the site. This includes the ``favicon.ico`` as well
 as all the mobile touch icons.
@@ -216,7 +216,7 @@ content
 .. code-block:: html
 
     <div class="container">
-      {% block content %}
+      {% templatetag openblock %} block content {% templatetag closeblock %}
         <div class="hero-unit">
           <h1>Hello, world!</h1>
           <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -239,7 +239,7 @@ content
             <p><a class="btn" href="#">View details &raquo;</a></p>
           </div>
         </div>
-      {% endblock %}
+      {% templatetag openblock %} endblock {% templatetag closeblock %}
 
 
 footer
@@ -250,9 +250,9 @@ footer
     <hr>
 
     <footer>
-      {% block  %}
+      {% templatetag openblock %} block footer {% templatetag closeblock %}
         <p>&copy; Company 2012</p>
-      {% endblock %}
+      {% templatetag openblock %} endblock {% templatetag closeblock %}
     </footer>
 
 jQuery
@@ -261,26 +261,26 @@ jQuery
 .. code-block:: html
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}vendor/js/jquery-1.8.2.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}vendor/js/jquery-1.8.2.min.js"><\/script>')</script>
 
 bootstrap.js
 ^^^^^^^^^^^^
 
 .. code-block:: html
 
-    {% compress js %}
-      <script src="{{ STATIC_URL }}vendor/js/bootstrap.js"></script>
-    {% endcompres %}
+    {% templatetag openblock %} compress js {% templatetag closeblock %}
+      <script src="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}vendor/js/bootstrap.js"></script>
+    {% templatetag openblock %} endcompress {% templatetag closeblock %}
 
 main.js
 ^^^^^^^
 
 .. code-block:: html
 
-    {% compress js %}
-      <script src="{{ STATIC_URL }}js/ga.js"></script>
-      <script src="{{ STATIC_URL }}js/main.js"></script>
-    {% endcompres %}
+    {% templatetag openblock %} compress js {% templatetag closeblock %}
+      <script src="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}js/ga.js"></script>
+      <script src="{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}js/main.js"></script>
+    {% templatetag openblock %} endcompress {% templatetag closeblock %}
 
 
 ``404.html``
@@ -299,7 +299,7 @@ provides a basic `not found` page.
 .. note::
 
     This template is not provided with any context. So you can't use any
-    variables inside it, including common ones like ``{{ STATIC_URL }}``.
+    variables inside it, including common ones like ``{% templatetag openvariable %} STATIC_URL {% templatetag closevariable %}``.
 
 This template cannot extend ``base.html`` because it doesn't have access
 to any context variables.

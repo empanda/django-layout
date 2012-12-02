@@ -846,7 +846,7 @@ Django Compressor settings
 .. attribute:: COMPRESS_PARSER
 
 :py:const:`COMPRESS_PARSER` controls which HTML parser Django Compressor
-will use when parsing ``{% compress %}`` template blocks.
+will use when parsing ``{% templatetag openblock %} compress {% templatetag closeblock %}`` template blocks.
 
 We set it to ``lxml`` because it's a super fast XML/HTML parser.
 
@@ -911,7 +911,7 @@ cached CSS and JS files.
 
 Compressing the static files in `offline` mode does have some limitations.
 You have to specify the context variables that you want available inside
-``{% compress %}`` template tags explicitly. See the
+``{% templatetag openblock %} compress {% templatetag closeblock %}`` template tags explicitly. See the
 `COMPRESS_OFFLINE_CONTEXT`_ setting.
 
 .. note::
