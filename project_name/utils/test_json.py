@@ -13,7 +13,8 @@ from .json import ExtendedJSONEncoder
 class ExtendedJSONEncoderTests(unittest.TestCase):
     def assertExtendedJSONEncoderReturns(self, input, expected):
         """A shorthand assertion for ExtendedJSONEncoder.default() equality."""
-        self.assertEqual(ExtendedJSONEncoder().default(input), expected)
+        output = ExtendedJSONEncoder().default(input)
+        self.assertEqual(output, expected)
 
     def test_supports_datetime_objects(self):
         """ExtendedJSONEncoder should return a JSON representation of a datetime.datetime."""
@@ -56,4 +57,5 @@ class ExtendedJSONEncoderTests(unittest.TestCase):
         """ExtendedJSONEncoder should return a JSON representation of a django.http.HttpResponse."""
         r = HttpResponse()
         self.assertExtendedJSONEncoderReturns(r,
-            {'status_code': 200, 'headers': {}, 'cookies': {}})
+            {'status_code': 200, 'cookies': Cookie.SimpleCookie(),
+             'headers': {'content-type': ('Content-Type', 'text/html; charset=utf-8')}})
