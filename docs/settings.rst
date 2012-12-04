@@ -492,14 +492,14 @@ output.
 Performs URL rewriting based on the :py:const:`APPEND_SLASH` and
 :py:const:`PREPEND_WWW` settings.
 
-If :py:const:`APPEND_SLASH` is ``True`` and the initial URL doesn’t end
+If :py:const:`APPEND_SLASH` is ``True`` and the initial URL doesn't end
 with a slash, and it is not found in the URLconf, then a new URL is formed
 by appending a slash at the end. If this new URL is found in the URLconf,
 then Django redirects the request to this new URL. Otherwise, the initial
 URL is processed as usual.
 
 For example, ``foo.com/bar`` will be redirected to ``foo.com/bar/`` if you
-don’t have a valid URL pattern for ``foo.com/bar`` but do have a valid
+don't have a valid URL pattern for ``foo.com/bar`` but do have a valid
 pattern for ``foo.com/bar/``.
 
 See also, Django's documentation for :py:data:`django.middleware.common.CommonMiddleware`
