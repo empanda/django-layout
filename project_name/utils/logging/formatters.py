@@ -72,7 +72,7 @@ class JSONFormatter(logging.Formatter):
         return {
             'type': unicode(exc_info[0]),
             'value': unicode(exc_info[1]),
-            'traceback': [dict(zip(st_fields, st) for st in traceback.extract_tb(exc_info[2])],
+            'traceback': [dict(zip(st_fields, st)) for st in traceback.extract_tb(exc_info[2])],
         }
 
     def fill_layout(self, record, layout):
