@@ -3,33 +3,35 @@ from django.test.utils import override_settings
 import mock
 
 import uuid
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 from .request_id import RequestIdMiddleware
 
 
 class RequestIdMiddlewareTests(unittest.TestCase):
-    def get_process_response(self, request_id='requestid', request=None, response=None):
+    def get_process_response(self, request_id='requestid', request=None, response=None, rim=None):
         """
         Builds up the required objects to pass to
         RequestIdMiddleware.process_response().
 
-        Passing in an object for request_id, request, or response, overwrites
-        the default.
+        Passing in an object for request_id, request, response, or
+        RequestIdMiddleware overwrites the default.
 
         Returns a 3 item tuple with, the result of process_response(), the
         header value used, and the request id used.
         """
         request = request
         if not request:
-            request = mock.MagicMock()
+            request = HttpRequest()
             request.id = request_id
 
         response = response
         if not response:
             response = HttpResponse()
 
-        rim = RequestIdMiddleware()
+        rim = rim
+        if not rim:
+            rim = RequestIdMiddleware()
 
         return (rim.process_response(request, response),
                 rim.REQUEST_ID_HEADER,
@@ -54,7 +56,8 @@ class RequestIdMiddlewareTests(unittest.TestCase):
     @override_settings(REQUEST_ID_HEADER=None)
     def test_process_response_does_not_add_header_when_turned_off(self):
         """RequestIdMiddleware should not add a header to the response when the header is turned off."""
-        response, header, _ = self.get_process_response()
+        response, _, _ = self.get_process_response()
+        header = 'X-REQUEST-ID'
 
         self.assertNotIn(header, response)
 
@@ -74,7 +77,7 @@ class RequestIdMiddlewareTests(unittest.TestCase):
         response[rim.REQUEST_ID_HEADER] = 'existing'
         response, header, request_id = self.get_process_response(response=response)
 
-        self.assertEqual(header, 'existing')
+        self.assertEqual(response[header], 'existing')
 
     def test_process_response_warns_when_not_adding(self):
         """RequestIdMiddleware should log a warnning when not overriding an existing header on the response."""
@@ -82,6 +85,6 @@ class RequestIdMiddlewareTests(unittest.TestCase):
         rim = RequestIdMiddleware(logger=mock_logger)
         response = HttpResponse()
         response[rim.REQUEST_ID_HEADER] = 'existing'
-        response, header, request_id = self.get_process_response(response=response)
+        response, header, request_id = self.get_process_response(response=response, rim=rim)
 
-        self.assertTrue(mock_logger.warnning.called)
+        self.assertTrue(mock_logger.warning.called)
