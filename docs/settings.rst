@@ -1319,19 +1319,55 @@ system`_.
         output all of the ``extra`` logging information by default without
         you having to specify it in the format beforehand.
 
+        .. note::
+
+            By default the file produced isn't valid JSON. It's just a
+            file with a valid JSON object on each line. You can process
+            the JSON log file several ways.
+
+            You can add commas at the end of each line except the last
+            line and add brackets ``[`` ``]`` at the beginning and end of
+            file. This makes the whole file valid JSON and you can just
+            run ``json.load('app.json.log')`` to load all the entries.
+
+            The other option you have is to parse the file line by line.
+            For example:
+
+            .. code-block:: python
+
+                with open('app.json.log') as logfile:
+                    for line in logfile:
+                        logline = json.loads(line)
+
+            I tend to prefer this method because it doesn't require
+            creating objects for the entire JSON file in memory before you
+            can do any processing.
+
+        .. note::
+
+            Just because the file contains JSON data doesn't mean that you
+            can only process it using JSON tools.
+
+            The file is also just a text file with one log entry per line.
+            This means that you can still do processing with all the
+            normal text manipulation and filtering tools that you are
+            used to. ``grep`` still works just fine for filtering.
+
         .. warning::
 
             The JSON formatter is quite verbose and stores a lot of data
-            by default. Each long line will be at least 500 bytes long.
+            by default. Each log line will be at between 500 - 1,000 bytes
+            in length.
 
             Disk space is cheap and verbose logging can be critical when
             trying to debug a production system.
 
-            Normally this won't be a problem however because it still
-            means you can store over 200,000 log messages per 100MB of
-            disk space.  Also, because of the verbosity of JSON, the log
-            files will compress down really well with a 15-30x compression
-            ratio.
+            Normally this won't be a problem because it still means you
+            can store about 100,000 log messages per 100MB of disk space.
+            Also, because of the verbosity of JSON, the log files will
+            compress down really well with a 15-30x compression ratio.
+            Meaning you could store 3,000,000 log messages per 100MB when
+            compressed.
 
         The Python code:
 
