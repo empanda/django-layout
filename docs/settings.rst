@@ -1167,6 +1167,18 @@ section<if-debug-toolbar-setting>`.
     DEBUG_TOOLBAR = DEBUG
 
 
+.. attribute:: COMPRESS_ENABLED
+
+The :py:const:`COMPRESS_ENABLED` flag controls whether or not Django
+Compressor serves the compressed content or not. By default this option is
+set to the same as :py:const:`DEBUG`. You can enable this while
+:py:const:`DEBUG` remains ``False`` to test the Django Compression output.
+
+.. code-block:: python
+
+    COMPRESS_ENABLED = DEBUG
+
+
 .. _database-settings:
 
 Database settings

@@ -15,6 +15,7 @@ from {{ project_name }}.settings.base import *   # pylint: disable=W0614,W0401
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DEBUG_TOOLBAR = DEBUG
+COMPRESS_ENABLED = DEBUG
 
 #==============================================================================
 # Database settings
