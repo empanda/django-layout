@@ -1,6 +1,6 @@
 var _gaq = [
   ['_setAccount', 'UA-XXXXX-X'],
-  ['_setSiteSpeedSampleRate', 10],
+  ['_setSiteSpeedSampleRate', 100],
   ['_trackPageview']
 ];
 
